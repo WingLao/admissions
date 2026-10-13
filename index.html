@@ -69,6 +69,9 @@ footer{margin-top:48px;color:var(--muted);font-size:13px}
 /* Match the integrated site's soft slate-blue palette. */
 :root[data-theme="dark"]{--bg:transparent;--surface:#1f2f43;--fg:#f2f6fa;--muted:#d3dde6;--line:#ffffff24;--accent:#afcdd4;--accent-soft:#31455c;--warn:#f0d59a;--warn-soft:#4f3d22;--ok:#a9d8c0;--ok-soft:#24443f}.q,.tbl,#doc blockquote{border-radius:12px}.q:hover{box-shadow:none}th{background:#ffffff0a}a.cite{padding:3px 6px}
 .standalone body{background:#40576f}
+#background{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;opacity:.55}
+#background canvas{display:block}
+.wrap{position:relative;z-index:1}
 .standalone .wrap{max-width:1040px;padding:24px 20px 64px}
 .standalone #doc h2{scroll-margin-top:16px}
 /* 外層頁面有固定導覽列，錨點要留位。 */
@@ -127,20 +130,367 @@ footer{margin-top:48px;color:var(--muted);font-size:13px}
 #doc.acc .sec-close{display:block;width:100%;min-height:46px;margin:18px 0 12px;border:1px solid var(--line);border-radius:10px;background:transparent;color:var(--accent);font:inherit;font-size:14px;cursor:pointer}
 #doc.acc details.sec[open]>summary h2{color:var(--accent)}
 @media (prefers-reduced-motion:reduce){#doc.acc details.sec>summary::after{transition:none}}
+
+/* Mobile reading: compact question groups and one comfortable reading column. */
+.mobile-tools{display:none}
+@media(max-width:640px){
+ .standalone .wrap{padding:20px 16px 96px}
+ .hero h1{font-size:28px;line-height:1.35}
+ .eyebrow{font-family:var(--body);font-size:12px;letter-spacing:0}
+ .legend{display:none}
+ .lede{font-size:15px}
+ .qgrid{display:block;margin:20px 0}
+ .qset{border:1px solid var(--line);border-radius:14px;background:var(--surface);margin:10px 0;overflow:hidden}
+ .qset>summary{padding:14px 16px;min-height:52px;font-weight:700;cursor:pointer}
+ .qset .q{border:0;border-top:1px solid var(--line);border-radius:0;padding:14px 16px;min-height:52px}
+ .qset .q span{font-size:16px}
+ .qset .q small{font-size:13px;line-height:1.65}
+ #doc.acc details.sec>summary{padding:16px 0;min-height:60px}
+ #doc.acc details.sec>summary h2{font-size:18px;line-height:1.6;text-wrap:initial}
+ td{display:block;padding:12px 16px;font-size:16px;line-height:1.8}
+ td[data-label]::before{display:block;font-size:13px;line-height:1.6;margin-bottom:4px}
+ td:first-child[data-label]::before{display:none}
+ .mobile-tools{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:20;gap:8px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--line)}
+ .mobile-tools a{flex:1;text-align:center;text-decoration:none;border:1px solid var(--line);border-radius:10px;min-height:44px;padding:8px;font-size:14px;font-weight:700}
+ #doc h2,.qgrid{scroll-margin-top:20px}
+}
+
+/* Two reading modes share the same source document and background. */
+.reading-switch{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+.reading-switch button,.figure-tools button,.table-tools input,.viewer-close{font:inherit;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:10px;min-height:44px;padding:9px 14px}
+.reading-switch button,.figure-tools button,.viewer-close{cursor:pointer}
+.reading-switch button[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.mode-note{font-size:13px;color:var(--muted);margin:0}
+.reading-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;margin-top:24px}
+.reader-toc{display:none}
+:root[data-reading="full"] .standalone .wrap,:root.standalone[data-reading="full"] .wrap{max-width:1480px;padding-inline:32px}
+:root[data-reading="full"] .reading-layout{grid-template-columns:240px minmax(0,1fr)}
+:root[data-reading="full"] .reader-toc{display:block;position:sticky;top:20px;align-self:start;max-height:calc(100dvh - 40px);overflow:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:16px}
+.reader-toc h2{font-size:16px;margin:0 0 12px}
+.reader-toc a{display:block;padding:8px 4px;font-size:13px;line-height:1.65;text-decoration:none;border-bottom:1px solid var(--line)}
+.reader-toc a:focus-visible,.reader-toc a:hover{background:var(--accent-soft)}
+:root[data-reading="full"] .qgrid{display:none}
+:root[data-reading="simple"] .legend{display:none}
+:root[data-reading="simple"] .qgrid{display:block}
+:root[data-reading="simple"] .qset{border:1px solid var(--line);border-radius:14px;background:var(--surface);margin:10px 0;overflow:hidden}
+:root[data-reading="simple"] .qset>summary{padding:14px 16px;min-height:52px;font-weight:700;cursor:pointer}
+:root[data-reading="simple"] .qset .q{border:0;border-top:1px solid var(--line);border-radius:0;padding:14px 16px}
+:root[data-reading="simple"] .wrap{max-width:840px}
+:root[data-reading="full"] #doc details.sec>summary{list-style:none;cursor:default}
+:root[data-reading="full"] #doc details.sec>summary::-webkit-details-marker{display:none}
+:root[data-reading="full"] #doc details.sec>summary h2{margin-top:28px}
+:root[data-reading="full"] .subsection>summary{list-style:none;cursor:default}
+:root[data-reading="full"] .subsection>summary::-webkit-details-marker{display:none}
+:root[data-reading="simple"] .subsection{border:1px solid var(--line);border-radius:12px;margin:12px 0;padding:0 14px;background:#ffffff06}
+:root[data-reading="simple"] .subsection>summary{cursor:pointer;padding:12px 0;min-height:48px}
+:root[data-reading="simple"] .subsection>summary h3{display:inline;margin:0;padding:0;border:0;font-size:16px;line-height:1.7}
+:root[data-reading="simple"] .subsection[open]{padding-bottom:12px}
+.table-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:24px 0 8px;flex-wrap:wrap}
+.table-tools label{display:flex;align-items:center;gap:8px;min-width:0;font-size:13px;color:var(--muted)}
+.table-tools input{width:220px;max-width:100%;min-width:0;padding:8px 12px}
+.table-tools output{font-size:12px;color:var(--muted)}
+.tbl{max-height:70dvh;overflow:auto}
+.tbl:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+th{position:sticky;top:0;z-index:2;background:var(--surface)}
+tbody tr:nth-child(even){background:#ffffff04}
+caption{text-align:left;padding:12px;font-size:14px;font-weight:700;color:var(--fg)}
+.figure{margin:24px 0;border:1px solid var(--line);border-radius:14px;background:var(--surface);overflow:hidden}
+.figure figcaption{padding:14px 16px;font-weight:700;font-size:15px;border-bottom:1px solid var(--line)}
+.figure-tools{display:flex;gap:8px;padding:10px 12px;align-items:center;flex-wrap:wrap}
+.figure-tools button{min-height:40px;font-size:13px;padding:6px 12px}
+.figure-tools output{font-size:12px;color:var(--muted)}
+.figure .mmd{margin:0;border:0;border-radius:0;padding:18px;max-height:65dvh;overflow:auto;text-align:left}
+.figure .mmd svg{display:block;max-width:none!important;margin:auto}
+.figure-note{font-size:12px;color:var(--muted);padding:8px 16px 14px;margin:0}
+.diagram-error{margin:0 16px 12px;color:var(--warn);font-size:13px}
+.figure-text{margin:0 16px 16px;color:var(--muted);font-size:13px}
+.figure-text summary{cursor:pointer;min-height:36px}
+.figure-text ol{padding-left:22px}
+.graph-viewer{width:calc(100vw - 32px);max-width:1400px;height:calc(100dvh - 32px);max-height:none;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:16px;padding:16px}
+.graph-viewer::backdrop{background:#000b}
+.viewer-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:10px}
+.viewer-head h2{font-size:18px;margin:0}
+.viewer-canvas{overflow:auto;height:calc(100% - 70px);padding:16px}
+.viewer-canvas svg{max-width:none!important;display:block;margin:auto}
+@media(max-width:900px){
+ :root[data-reading="full"] .reading-layout{grid-template-columns:minmax(0,1fr)}
+ :root[data-reading="full"] .reader-toc{position:static;max-height:280px}
+ :root.standalone[data-reading="full"] .wrap{padding:20px 16px 96px}
+}
+@media(max-width:640px){
+ :root[data-reading="simple"] .tbl{max-height:none;overflow:visible}
+ :root[data-reading="simple"] caption{display:none}
+ :root[data-reading="simple"] .subsection>.figure>figcaption{display:none}
+ :root[data-reading="simple"] .figure-tools button:not([data-zoom="open"]),
+ :root[data-reading="simple"] .figure-tools output{display:none}
+ :root[data-reading="simple"] .figure-tools{justify-content:flex-end}
+ .table-tools input{width:180px}
+ :root[data-reading="full"] table{display:table;min-width:720px}
+ :root[data-reading="full"] tbody{display:table-row-group}
+ :root[data-reading="full"] thead{display:table-header-group}
+ :root[data-reading="full"] tr{display:table-row;border:0;border-radius:0}
+ :root[data-reading="full"] td{display:table-cell;min-width:8em;padding:12px;font-size:14px;font-weight:400}
+ :root[data-reading="full"] td[data-label]::before{display:none}
+ :root[data-reading="full"] td.blank{display:table-cell}
+ .figure-tools{gap:6px}.figure-tools button{padding:6px 10px}
+}
+[hidden]{display:none!important}
+@media print{
+ #background,.reading-switch,.reader-toc,.qgrid,.mobile-tools,.figure-tools,.table-tools,.sec-close,.figure-text{display:none!important}
+ body,.standalone body{background:white!important;color:black!important}
+ .wrap{max-width:none!important;padding:0!important}.reading-layout{display:block!important}
+ .tbl{max-height:none;overflow:visible}th{position:static}table{font-size:11px}
+ .figure{break-inside:avoid}.figure .mmd{max-height:none;overflow:visible}
+}
 </style>
 
 <script>/* 單獨開啟（不是嵌在網站內）時補上底色及邊距 */if(parent===window)document.documentElement.classList.add("standalone");</script>
+<div id="background" aria-hidden="true"></div><script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.min.js"></script><script>/* 大氣流場背景：像天氣圖一樣的風、等壓線與雲。
+ * 一個緩慢演變的「氣壓場」（noise）決定一切：
+ *   - 風沿等壓線吹（地轉風：速度 = 氣壓場的旋度），疊加一股西風帶，所以會出現
+ *     蜿蜒的急流和繞著高、低壓中心打轉的氣旋；
+ *   - 幼細的等壓線及 H／L 標記畫出氣壓場本身；
+ *   - 低解析度的雲層貼圖放大後成為柔和的雲帶，低壓附近雲較多。
+ * 三層畫布：雲（極小、由 CSS 放大）、等壓線、風（p5 主畫布，以淡出方式留下短尾）。
+ * 單一 p5 instance；頁面隱藏或系統要求減少動態時停在一幀靜態流線圖。 */
+(() => {
+  const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  const state = { mode: 'flow', strength: 55 };
+  const CELL = 44;                 // 氣壓場格距（px）
+  const LEVELS = [0.32, 0.38, 0.44, 0.5, 0.56, 0.62, 0.68];
+  let current = null;
+
+  const host = () => document.getElementById('background');
+  const animating = () => state.mode === 'flow' && !motion.matches && !document.hidden;
+  const layer = () => {
+    const c = document.createElement('canvas');
+    c.style.cssText = 'position:absolute;inset:0;width:100%;height:100%';
+    return c;
+  };
+
+  function build(target) {
+    const handle = { p: null, ready: false, dead: false, extras: [] };
+    handle.p = new p5(p => {
+      let mobile = false, time = 40, frame = 0, density = 1;
+      let cols = 0, rows = 0, pressure, windU, windV;
+      let count = 0, px, py, age, life;
+      let cloudCanvas, cloudCtx, cloudImage, isoCanvas, isoCtx;
+      const SCALE = 0.0026, DRIFT = 10, JET = 0.85, SWIRL = 520;
+
+      const measure = () => {
+        mobile = innerWidth <= 640;
+        return [innerWidth, innerHeight + (mobile ? 120 : 0)];
+      };
+      const field = (x, y) => p.noise((x - time * DRIFT) * SCALE, y * SCALE * 1.25, time * 0.02);
+      const seed = i => {
+        px[i] = Math.random() * p.width; py[i] = Math.random() * p.height;
+        age[i] = 0; life[i] = 2.5 + Math.random() * 5;
+      };
+      const layout = () => {
+        density = Math.min(devicePixelRatio || 1, 1.5);
+        cols = Math.ceil(p.width / CELL) + 4; rows = Math.ceil(p.height / CELL) + 4;
+        pressure = new Float32Array(cols * rows); windU = new Float32Array(cols * rows); windV = new Float32Array(cols * rows);
+        count = Math.min(mobile ? 260 : 720, Math.round(p.width * p.height / (mobile ? 1500 : 1900)));
+        px = new Float32Array(count); py = new Float32Array(count); age = new Float32Array(count); life = new Float32Array(count);
+        for (let i = 0; i < count; i++) { seed(i); age[i] = Math.random() * life[i]; }
+        const cw = mobile ? 56 : 104, ch = Math.max(24, Math.round(cw * p.height / p.width));
+        cloudCanvas.width = cw; cloudCanvas.height = ch;
+        cloudImage = cloudCtx.createImageData(cw, ch);
+        isoCanvas.width = Math.round(p.width * density); isoCanvas.height = Math.round(p.height * density);
+        p.clear();
+      };
+
+      // 氣壓場及由它導出的風（格點在畫布外多留一圈，方便取差分及插值）。
+      const updateField = () => {
+        for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++) pressure[j * cols + i] = field((i - 1) * CELL, (j - 1) * CELL);
+        for (let j = 1; j < rows - 1; j++) for (let i = 1; i < cols - 1; i++) {
+          const k = j * cols + i;
+          windU[k] = JET + SWIRL * (pressure[k + cols] - pressure[k - cols]) / (2 * CELL);
+          windV[k] = -SWIRL * (pressure[k + 1] - pressure[k - 1]) / (2 * CELL);
+        }
+      };
+      const drawIsobars = () => {
+        const ctx = isoCtx;
+        ctx.setTransform(density, 0, 0, density, 0, 0);
+        ctx.clearRect(0, 0, p.width, p.height);
+        ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(236,244,248,0.2)';
+        ctx.beginPath();
+        for (let j = 0; j < rows - 1; j++) for (let i = 0; i < cols - 1; i++) {
+          const k = j * cols + i, a = pressure[k], b = pressure[k + 1], c = pressure[k + cols + 1], d = pressure[k + cols];
+          const lo = Math.min(a, b, c, d), hi = Math.max(a, b, c, d);
+          const x = (i - 1) * CELL, y = (j - 1) * CELL;
+          for (const level of LEVELS) {
+            if (level < lo || level > hi) continue;
+            // Marching squares：找出等值線穿過的邊，逐段連線。
+            let n = 0;
+            const cut = (va, vb, xa, ya, xb, yb) => {
+              if ((va < level) === (vb < level)) return;
+              const f = (level - va) / (vb - va), cx = xa + (xb - xa) * f, cy = ya + (yb - ya) * f;
+              if (n++ % 2) ctx.lineTo(cx, cy); else ctx.moveTo(cx, cy);
+            };
+            cut(a, b, x, y, x + CELL, y);
+            cut(b, c, x + CELL, y, x + CELL, y + CELL);
+            cut(d, c, x, y + CELL, x + CELL, y + CELL);
+            cut(a, d, x, y, x, y + CELL);
+          }
+        }
+        ctx.stroke();
+        // 高、低壓中心。
+        ctx.font = '600 15px ui-sans-serif, system-ui, sans-serif'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillStyle = 'rgba(240,247,250,0.34)';
+        for (let j = 2; j < rows - 2; j++) for (let i = 2; i < cols - 2; i++) {
+          const k = j * cols + i, v = pressure[k];
+          if (v < 0.64 && v > 0.36) continue;
+          let peak = true;
+          for (let dj = -2; dj <= 2 && peak; dj++) for (let di = -2; di <= 2; di++) {
+            const o = pressure[k + dj * cols + di];
+            if ((di || dj) && (v >= 0.64 ? o >= v : o <= v)) { peak = false; break; }
+          }
+          if (peak) ctx.fillText(v >= 0.64 ? 'H' : 'L', (i - 1) * CELL, (j - 1) * CELL);
+        }
+      };
+      const drawClouds = () => {
+        const w = cloudCanvas.width, h = cloudCanvas.height, data = cloudImage.data, sx = p.width / w, sy = p.height / h;
+        for (let y = 0, k = 0; y < h; y++) for (let x = 0; x < w; x++, k += 4) {
+          const wx = x * sx, wy = y * sy;
+          const wisp = p.noise((wx - time * DRIFT * 2.4) * 0.0036 + 50, wy * 0.0075, time * 0.045);
+          let c = wisp + (0.5 - field(wx, wy)) * 0.55;   // 低壓區雲量較多
+          c = Math.max(0, Math.min(1, (c - 0.47) / 0.24));
+          data[k] = 238; data[k + 1] = 245; data[k + 2] = 249; data[k + 3] = c * c * (3 - 2 * c) * 120;
+        }
+        cloudCtx.putImageData(cloudImage, 0, 0);
+      };
+
+      // 風：每點沿風場前進，畫一小段；按風速分三組筆觸，強風較亮。
+      const paths = [new Path2D(), new Path2D(), new Path2D()];
+      const advect = (dt, speed) => {
+        paths[0] = new Path2D(); paths[1] = new Path2D(); paths[2] = new Path2D();
+        for (let i = 0; i < count; i++) {
+          const gx = px[i] / CELL + 1, gy = py[i] / CELL + 1, ci = gx | 0, cj = gy | 0, fx = gx - ci, fy = gy - cj, k = cj * cols + ci;
+          const u = (windU[k] * (1 - fx) + windU[k + 1] * fx) * (1 - fy) + (windU[k + cols] * (1 - fx) + windU[k + cols + 1] * fx) * fy;
+          const v = (windV[k] * (1 - fx) + windV[k + 1] * fx) * (1 - fy) + (windV[k + cols] * (1 - fx) + windV[k + cols + 1] * fx) * fy;
+          const nx = px[i] + u * speed * dt, ny = py[i] + v * speed * dt, mag = u * u + v * v;
+          const path = paths[mag > 1.7 ? 2 : mag > 0.6 ? 1 : 0];
+          path.moveTo(px[i], py[i]); path.lineTo(nx, ny);
+          px[i] = nx; py[i] = ny; age[i] += dt;
+          if (age[i] > life[i] || nx < -CELL || nx > p.width + CELL || ny < -CELL || ny > p.height + CELL) seed(i);
+        }
+      };
+      const stroke = (ctx, boost) => {
+        ctx.lineCap = 'round';
+        const look = [[0.2, 0.9], [0.32, 1.1], [0.46, 1.3]];
+        for (let g = 0; g < 3; g++) {
+          ctx.strokeStyle = `rgba(240,247,250,${Math.min(1, look[g][0] * boost)})`;
+          ctx.lineWidth = look[g][1];
+          ctx.stroke(paths[g]);
+        }
+      };
+
+      const sync = () => {
+        if (animating()) p.loop();
+        else { p.noLoop(); p.redraw(); }
+      };
+      handle.sync = sync;
+
+      p.setup = () => {
+        if (handle.dead) { p.noCanvas(); p.noLoop(); setTimeout(() => p.remove()); return; }
+        const [w, h] = measure();
+        cloudCanvas = layer(); isoCanvas = layer();
+        cloudCtx = cloudCanvas.getContext('2d'); isoCtx = isoCanvas.getContext('2d');
+        target.append(cloudCanvas, isoCanvas);
+        handle.extras = [cloudCanvas, isoCanvas];
+        const main = p.createCanvas(w, h);
+        main.elt.style.position = 'absolute';
+        p.pixelDensity(Math.min(devicePixelRatio || 1, 1.5));
+        p.frameRate(mobile ? 24 : 30);
+        p.noiseDetail(2, 0.3);
+        p.noiseSeed(41);
+        layout();
+        handle.ready = true;
+        sync();
+      };
+
+      p.draw = () => {
+        const ctx = p.drawingContext, live = p.isLooping();
+        if (!live) {
+          // 靜態：畫出一幅流線圖後停住。
+          updateField(); drawIsobars(); drawClouds();
+          p.clear();
+          for (let s = 0; s < 46; s++) { advect(1 / 30, 70); stroke(ctx, 0.3); }
+          return;
+        }
+        const dt = Math.min(p.deltaTime, 80) / 1000;
+        time += dt;
+        if (frame % 3 === 0) { updateField(); drawIsobars(); }
+        if (frame % 6 === 0) drawClouds();
+        frame++;
+        // 以「擦淡」代替清除，風留下短尾而畫布保持透明。
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.fillStyle = 'rgba(0,0,0,0.06)';
+        ctx.fillRect(0, 0, p.width, p.height);
+        ctx.globalCompositeOperation = 'source-over';
+        advect(dt, 78);
+        stroke(ctx, 1);
+      };
+
+      p.windowResized = () => {
+        if (!handle.ready) return;
+        const [w, h] = measure();
+        // 忽略手機瀏覽器工具列造成的小幅高度變化。
+        if (w === p.width && h <= p.height && p.height - h < 200) return;
+        p.frameRate(mobile ? 24 : 30);
+        p.resizeCanvas(w, h);
+        layout();
+        frame = 0;
+        if (!p.isLooping()) p.redraw();
+      };
+    }, target);
+    return handle;
+  }
+
+  function destroy() {
+    if (!current) return;
+    current.dead = true;
+    for (const c of current.extras) c.remove();
+    if (current.ready) current.p.remove();
+    current = null;
+  }
+  function refresh() {
+    if (current && current.ready) current.sync();
+  }
+
+  window.makeCompetitionBackground = (mode = 'flow', strength = 55) => {
+    const el = host();
+    if (!el) return;
+    state.mode = ['flow', 'still', 'none'].includes(mode) ? mode : 'flow';
+    state.strength = Math.max(0, Math.min(100, Number(strength) || 0));
+    el.dataset.mode = state.mode;
+    el.style.opacity = state.strength / 100;
+    if (state.mode === 'none' || state.strength === 0) { destroy(); return; }
+    if (typeof p5 === 'undefined') { el.classList.add('is-fallback'); return; }
+    if (!current) current = build(el);
+    refresh();
+  };
+
+  // 只註冊一次：暫停或恢復現有的 sketch。
+  document.addEventListener('visibilitychange', refresh);
+  motion.addEventListener?.('change', refresh);
+})();
+
+window.makeCompetitionBackground("flow",55);</script>
 <div class="wrap">
-<header class="hero">
+<header id="page-top" class="hero">
   <div class="eyebrow">澳門中學升學輔導 · 核實日 2026-10-07</div>
   <h1>升學加分問答指南</h1>
-  <p class="lede">澳門四校、香港各大學、內地名校：哪些比賽、代表資格和證書，在招生條文中真的有加分、免考、推薦或獎學金。每句結論都附官方來源。</p>
+  <p class="lede">想知道比賽、證書或代表資格對升學有甚麼幫助？先選問題，再看澳門、香港及內地大學的規定。每項結論附官方來源。</p>
+  <div class="reading-switch" role="group" aria-label="閱讀版本"><button type="button" data-reading-mode="simple" aria-pressed="false">簡易版 · 手機</button><button type="button" data-reading-mode="full" aria-pressed="false">完整版 · 電腦</button></div>
+  <p id="mode-note" class="mode-note" role="status"></p>
   <div class="legend">
     <span class="chip"><b>①</b> 明列分值</span><span class="chip"><b>②</b> 可評核加分</span><span class="chip"><b>③</b> 免考／優先／放寬</span><span class="chip"><b>④</b> 獎學金</span><span class="chip">未公布＝不說有加分</span>
   </div>
 </header>
 
-<nav class="qgrid" aria-label="常見問題">
+<nav id="questions" class="qgrid" aria-label="常見問題">
   <div class="qgroup">學生常問</div>
   <a class="q" href="#q1"><span>四校聯考有哪些加分？</span><small>澳大、理大、科大、旅大分值與免考</small></a>
   <a class="q" href="#q2"><span>澳大加分與推薦</span><small>科普 11 項、人文 9 項、校長推薦</small></a>
@@ -160,10 +510,11 @@ footer{margin-top:48px;color:var(--muted);font-size:13px}
   <a class="q" href="#appendix"><span>附錄：條文細表</span><small>音樂、全人發展、醫學英文免考、理大專才、證書界線</small></a>
 </nav>
 
-<main id="doc"><p>載入中…</p></main>
+<div class="reading-layout"><aside class="reader-toc" aria-label="章節目錄"><h2>章節目錄</h2><nav id="reader-toc-links"></nav></aside><main id="doc"><p>載入中…</p></main></div>
 <footer>資料以各大學及主辦單位官方條文為準；條文更新時請按來源連結重新核對。</footer>
 </div>
 <a class="top" href="#">回到頂部</a>
+<nav class="mobile-tools" aria-label="閱讀導覽"><a href="#questions">選問題</a><a href="#page-top">回頁首</a></nav>
 
 <script type="text/markdown" id="md">
 # 升學加分問答指南：澳門四校・香港・內地名校
@@ -1039,7 +1390,7 @@ flowchart TD
 | **CCF CSP-J／S**｜中國計算機學會｜2425、2627 進行中 | 未點名；可評核 | 佐證 | 可評核 | 屬信息學競賽：清華、北大可作佐證，爭取放寬排名；簡章未點名 CSP。其餘三校未列競賽作用 | 可評核；未點名 |
 | **CCF NOIP**｜中國計算機學會｜2425 | 未點名；可評核 | 佐證 | 可評核 | 屬信息學競賽：清華、北大可作佐證，爭取放寬排名；簡章未點名 NOIP。其餘三校未列競賽作用 | 可評核；未點名 |
 | **CCF NOI 入選澳門隊**｜2425 | 未點名；可評核。**不能**套用體育「澳門區代表」加分 | 佐證 | 可評核 | 清華、北大可作佐證。內地「學科奧賽國家集訓隊保送」**不適用**：澳門代表隊不等同國家集訓隊 | 可評核。科大理學院只寫香港隊成員獲有利考慮，未寫澳門代表等同 |
-| **International Cyber Olympiad in AI 入選澳門隊**｜2526 | 未點名；可評核。不能套用體育代表加分 | 佐證 | 可評核 | 佐證；不屬五大學科奧賽 | 可評核；未點名 |
+| **International Cyber Olympiad in AI 入選澳門隊、銀牌**｜2526 | 未點名；可評核。不能套用體育代表加分 | 佐證 | 可評核 | 佐證；不屬五大學科奧賽 | 可評核；未點名 |
 | **全澳中學生資訊科技知識問答比賽**｜CPTTM、教青局｜2425、2526、2627 進行中 | 未點名；可評核。**不是**滙業盃 | 佐證 | 可評核 | 佐證；簡章未點名 | 可評核；未點名 |
 | **全澳學生手機網站技術技能比賽**｜CPTTM、教青局｜2425、2526、2627 進行中 | 未點名；可評核 | 佐證 | 可評核 | 佐證；簡章未點名 | 可評核；未點名 |
 | **澳門學生 Office 軟件技能比賽（MOS）**｜CPTTM、教青局｜2425、2526 | 未點名；可評核 | 佐證 | 可評核 | 佐證；簡章未點名 | 可評核；未點名 |
@@ -1413,40 +1764,100 @@ flowchart TD
     else if(/^有[：:]|^\*?\*?可以/.test(t))td.classList.add('yes');});
   // citations
   doc.querySelectorAll('a').forEach(function(a){if(/^[A-Z][A-Z0-9]{1,9}$/.test(a.textContent.trim())){a.classList.add('cite');a.target='_blank';a.rel='noopener';a.title=a.href;}});
-  // mermaid
-  var blocks=doc.querySelectorAll('pre code.language-mermaid');
+  var root=document.documentElement;
+  var preferred=new URL(location.href).searchParams.get('view');
+  var mode=preferred==='simple'||preferred==='full'?preferred:(matchMedia('(max-width:760px)').matches?'simple':'full');
+  var viewer=document.createElement('dialog');viewer.className='graph-viewer';
+  viewer.innerHTML='<div class="viewer-head"><h2 id="viewer-title">關連圖</h2><button type="button" class="viewer-close">關閉</button></div><div class="viewer-canvas" tabindex="0" aria-label="關連圖，可左右及上下滑動"></div>';
+  viewer.setAttribute('aria-labelledby','viewer-title');document.body.appendChild(viewer);
+  viewer.querySelector('button').addEventListener('click',function(){viewer.close();});
+  // Figures reuse the original Mermaid source; no admissions facts are added.
   var n=0;
-  blocks.forEach(function(c){var d=document.createElement('div');d.className='mmd';d.dataset.src=c.textContent;d.textContent=c.textContent;d.classList.add('src');c.parentElement.replaceWith(d);});
-  if(window.mermaid){
-    var dark=document.documentElement.dataset.theme==='dark'||(document.documentElement.dataset.theme!=='light'&&matchMedia('(prefers-color-scheme: dark)').matches);
-    mermaid.initialize({startOnLoad:false,theme:dark?'dark':'neutral',securityLevel:'loose',flowchart:{htmlLabels:true,curve:'basis'},fontFamily:'Noto Sans TC, PingFang TC, sans-serif'});
-    doc.querySelectorAll('.mmd').forEach(function(d){
-      mermaid.render('mmd'+(n++),d.dataset.src).then(function(r){d.innerHTML=r.svg;d.classList.remove('src');
-        var s=d.querySelector('svg'),w=s&&s.viewBox.baseVal.width;
-        if(w&&w*0.6>doc.clientWidth-34){d.classList.add('wide');s.style.setProperty('max-width','none','important');s.style.width=Math.round(w*0.8)+'px';}
-      }).catch(function(){});
+  if(window.mermaid)mermaid.initialize({startOnLoad:false,theme:'dark',securityLevel:'strict',flowchart:{htmlLabels:true,curve:'basis',useMaxWidth:false},fontFamily:'Noto Sans TC, PingFang TC, sans-serif'});
+  doc.querySelectorAll('pre code.language-mermaid').forEach(function(c){
+    var source=c.textContent, figure=document.createElement('figure');figure.className='figure';
+    var previous=c.parentElement.previousElementSibling;
+    var title=previous&&/^H[23]$/.test(previous.tagName)?previous.textContent:'獎項與升學途徑關連圖';
+    var caption=document.createElement('figcaption');caption.textContent=title;figure.appendChild(caption);
+    var tools=document.createElement('div');tools.className='figure-tools';
+    tools.innerHTML='<button type="button" data-zoom="out" aria-label="縮小關連圖">− 縮小</button><button type="button" data-zoom="in" aria-label="放大關連圖">＋ 放大</button><button type="button" data-zoom="fit">適合寬度</button><button type="button" data-zoom="open">放大檢視</button><output aria-live="polite"></output>';figure.appendChild(tools);
+    var drawing=document.createElement('div');drawing.className='mmd src';drawing.textContent=source;drawing.tabIndex=0;drawing.setAttribute('aria-label',title+'，可滑動檢視');figure.appendChild(drawing);
+    var note=document.createElement('p');note.className='figure-note';note.textContent='拖動捲軸查看全圖，或按「放大檢視」。圖中文字以原稿條文為準。';figure.appendChild(note);
+    var text=document.createElement('details');text.className='figure-text';var summary=document.createElement('summary');summary.textContent='查看圖中文字';text.appendChild(summary);
+    var list=document.createElement('ol');var labels=[];
+    var pattern=/\["([^"\n]+)"\]|\{"([^"\n]+)"\}/g, match;
+    while((match=pattern.exec(source))){var label=(match[1]||match[2]).replace(/<br\s*\/?\s*>/gi,' · ');if(labels.indexOf(label)<0){labels.push(label);var li=document.createElement('li');li.textContent=label;list.appendChild(li);}}
+    text.appendChild(list);figure.appendChild(text);c.parentElement.replaceWith(figure);
+    var svg=null,natural=800,scale=1;
+    function fit(){scale=Math.min(1,Math.max(.3,(drawing.clientWidth-36)/natural));resize();}
+    function resize(){if(!svg)return;svg.style.width=Math.round(natural*scale)+'px';svg.style.height='auto';tools.querySelector('output').textContent=Math.round(scale*100)+'%';}
+    tools.querySelectorAll('button').forEach(function(button){button.disabled=true;button.addEventListener('click',function(){
+      var action=button.dataset.zoom;
+      if(action==='fit'){fit();return;}
+      if(action==='open'){viewer.querySelector('h2').textContent=title;var holder=document.createElement('div');var ids=[svg.id].concat([].map.call(svg.querySelectorAll('[id]'),function(el){return el.id;})).sort(function(a,b){return b.length-a.length;});var idPattern=new RegExp(ids.map(function(id){return id.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');}).join('|'),'g');holder.innerHTML=svg.outerHTML.replace(idPattern,function(id){return 'viewer-'+id;});var clone=holder.firstElementChild;clone.style.width=natural+'px';viewer.querySelector('.viewer-canvas').replaceChildren(clone);viewer.showModal();return;}
+      scale=Math.max(.25,Math.min(3,scale*(action==='in'?1.25:.8)));resize();
+    });});
+    function failed(){var error=document.createElement('p');error.className='diagram-error';error.textContent='圖表暫未載入，可先查看下方的圖中文字。';figure.insertBefore(error,drawing);text.open=true;}
+    if(window.mermaid)mermaid.render('guide-diagram-'+(n++),source).then(function(result){drawing.innerHTML=result.svg;drawing.classList.remove('src');svg=drawing.querySelector('svg');natural=svg.viewBox.baseVal.width||800;svg.setAttribute('role','img');svg.setAttribute('aria-label',title);tools.querySelectorAll('button').forEach(function(button){button.disabled=false;});fit();new ResizeObserver(function(){if(mode==='simple')fit();}).observe(drawing);}).catch(failed);else failed();
+  });
+  // Build the same section tree for both modes; full mode opens every section.
+  var current=null,sectionIndex=0;
+  [].slice.call(doc.children).forEach(function(el){
+    if(el.tagName==='H2'){
+      if(el.classList.contains('part')){current=null;return;}
+      if(!el.id)el.id='section-'+(sectionIndex++);
+      current=document.createElement('details');current.className='sec';
+      var summary=document.createElement('summary');doc.insertBefore(current,el);summary.appendChild(el);current.appendChild(summary);
+      var link=document.createElement('a');link.href='#'+el.id;link.textContent=el.textContent;document.getElementById('reader-toc-links').appendChild(link);
+      summary.addEventListener('click',function(e){if(mode==='full')e.preventDefault();});
+    }else if(current&&el.tagName!=='HR'){current.appendChild(el);}
+  });
+  doc.querySelectorAll('details.sec').forEach(function(section){
+    var subsection=null;
+    [].slice.call(section.children).forEach(function(el){
+      if(el.tagName==='H3'){
+        subsection=document.createElement('details');subsection.className='subsection';var summary=document.createElement('summary');
+        section.insertBefore(subsection,el);summary.appendChild(el);subsection.appendChild(summary);
+        summary.addEventListener('click',function(e){if(mode==='full')e.preventDefault();});
+      }else if(subsection&&el.tagName!=='SUMMARY'){subsection.appendChild(el);}
     });
+    section.addEventListener('toggle',function(){if(mode==='simple'&&section.open)doc.querySelectorAll('details.sec').forEach(function(other){if(other!==section)other.open=false;});});
+    var close=document.createElement('button');close.type='button';close.className='sec-close';close.textContent='↑ 收起本節';close.addEventListener('click',function(){section.open=false;section.scrollIntoView({block:'start'});});section.appendChild(close);
+  });
+  // Table controls filter existing rows, retaining headers, source links and text.
+  doc.querySelectorAll('.tbl').forEach(function(wrapper,index){
+    var table=wrapper.querySelector('table'),rows=[].slice.call(table.querySelectorAll('tbody tr'));
+    var context=wrapper.closest('.subsection')||wrapper.closest('.sec');var heading=context&&context.querySelector('summary h3,summary h2');
+    var caption=document.createElement('caption');caption.textContent=heading&&heading.tagName==='H3'?heading.textContent:'比較表 '+(index+1);table.prepend(caption);
+    wrapper.tabIndex=0;wrapper.setAttribute('role','region');wrapper.setAttribute('aria-label',caption.textContent+'，可滑動查看比較欄位');
+    var tools=document.createElement('div');tools.className='table-tools';var label=document.createElement('label');label.textContent='搜尋此表';
+    var input=document.createElement('input');input.type='search';input.placeholder='大學、比賽或資格';input.setAttribute('aria-label','搜尋'+caption.textContent);label.appendChild(input);tools.appendChild(label);
+    var output=document.createElement('output');output.setAttribute('aria-live','polite');tools.appendChild(output);wrapper.before(tools);
+    function filter(){var query=input.value.trim().toLocaleLowerCase();var count=0;rows.forEach(function(row){row.hidden=!!query&&!row.textContent.toLocaleLowerCase().includes(query);if(!row.hidden)count++;});output.textContent=count+' / '+rows.length+' 項';}
+    input.addEventListener('input',filter);filter();
+    if(rows.length<8)tools.hidden=true;
+  });
+  var questions=document.getElementById('questions'),group=null;
+  [].slice.call(questions.children).forEach(function(el){
+    if(el.classList.contains('qgroup')){group=document.createElement('details');group.className='qset';var heading=document.createElement('summary');heading.textContent=el.textContent;group.appendChild(heading);questions.insertBefore(group,el);el.remove();if(questions.querySelectorAll('.qset').length===1)group.open=true;}else if(group)group.appendChild(el);
+  });
+  function applyMode(next,updateUrl){
+    mode=next;root.dataset.reading=mode;doc.classList.toggle('acc',mode==='simple');
+    doc.querySelectorAll('details.sec,details.subsection').forEach(function(section){section.open=mode==='full';});
+    document.querySelectorAll('[data-reading-mode]').forEach(function(button){button.setAttribute('aria-pressed',String(button.dataset.readingMode===mode));});
+    document.getElementById('mode-note').textContent=mode==='simple'?'先選問題，再展開需要的細項。所有條文及來源仍可查看。':'完整條文、比較表及關連圖已展開；可用章節目錄快速定位。';
+    if(updateUrl){var url=new URL(location.href);url.searchParams.set('view',mode);history.replaceState(null,'',url);}
   }
-  // 手機：把每個 h2 連同其後內容包成可收合的一節。
-  if(matchMedia('(max-width:640px)').matches){
-    doc.classList.add('acc');var cur=null;
-    [].slice.call(doc.children).forEach(function(el){
-      if(el.tagName==='H2'){
-        if(el.classList.contains('part')){cur=null;return;}
-        cur=document.createElement('details');cur.className='sec';var s=document.createElement('summary');
-        doc.insertBefore(cur,el);s.appendChild(el);cur.appendChild(s);
-      }else if(cur&&el.tagName!=='HR'){cur.appendChild(el);}
-    });
-    // 每節末加「收起本節」，長內容讀完不用滑回標題。
-    doc.querySelectorAll('details.sec').forEach(function(d){var b=document.createElement('button');b.type='button';b.className='sec-close';b.textContent='↑ 收起本節';
-      b.addEventListener('click',function(){d.open=false;d.scrollIntoView({block:'start'});});d.appendChild(b);});
+  document.querySelectorAll('[data-reading-mode]').forEach(function(button){button.addEventListener('click',function(){applyMode(button.dataset.readingMode,true);if(location.hash)go(decodeURIComponent(location.hash.slice(1)));});});
+  function go(id){var target=id&&document.getElementById(id);if(!target)return false;
+    var section=target.closest('details.sec');if(section&&mode==='simple')doc.querySelectorAll('details.sec').forEach(function(other){other.open=other===section;});
+    var ancestor=target.parentElement;while(ancestor){if(ancestor.tagName==='DETAILS')ancestor.open=true;ancestor=ancestor.parentElement;}
+    setTimeout(function(){target.scrollIntoView({block:'start'});},150);return true;
   }
-  function go(id){var t=id&&document.getElementById(id);if(!t)return false;
-    var sec=t.closest('details.sec');if(sec)sec.open=true;
-    setTimeout(function(){t.scrollIntoView({block:'start'});},150);return true;}
-  document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;
-    if(go(decodeURIComponent(a.getAttribute('href').slice(1))))e.preventDefault();});
-  if(location.hash)go(decodeURIComponent(location.hash.slice(1)));
+  document.addEventListener('click',function(e){var link=e.target.closest('a[href^="#"]');if(!link)return;var id=decodeURIComponent(link.getAttribute('href').slice(1));if(go(id)){e.preventDefault();var url=new URL(location.href);url.hash=id;history.replaceState(null,'',url);}});
+  applyMode(mode,false);if(location.hash)go(decodeURIComponent(location.hash.slice(1)));
+  var printState=[];window.addEventListener('beforeprint',function(){printState=[].map.call(doc.querySelectorAll('details'),function(section){var open=section.open;section.open=true;return [section,open];});});window.addEventListener('afterprint',function(){printState.forEach(function(item){item[0].open=item[1];});});
+
 })();
 </script>
 
