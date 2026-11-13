@@ -58,6 +58,17 @@ a{color:var(--accent)}
 a.cite{font-family:var(--mono);font-size:11.5px;text-decoration:none;padding:1px 5px;border-radius:4px;background:var(--accent-soft);white-space:nowrap}
 a.cite::before{content:"["}a.cite::after{content:"]"}
 a.cite:hover{text-decoration:underline}
+/* Bilingual sections: English sits on its own line under the Chinese, quieter and in a Latin face. */
+.en{display:block;margin-top:3px;color:var(--muted);font-family:"Inter","Helvetica Neue",Arial,var(--body);font-size:.9em;font-weight:400;line-height:1.5;letter-spacing:0;text-wrap:pretty}
+.en strong{color:var(--fg);font-weight:600}
+#doc h3 .en{margin-top:4px;font-size:13.5px;font-weight:500;color:var(--muted)}
+#doc p>strong+.en{margin-top:0}
+th .en{margin-top:1px;font-size:11px;font-weight:500;white-space:normal}
+td:first-child .en{font-weight:500}
+li>.en{margin-bottom:4px}
+td[data-label]::before{white-space:pre-line}
+.en{overflow-wrap:normal;word-break:normal;hyphens:manual}
+table:has(.en) td:first-child{min-width:8.5em}
 .mmd{overflow-x:auto;margin:14px 0 20px;padding:16px;border:1px dashed var(--line);border-radius:10px;background:var(--surface);text-align:center}
 .mmd svg{max-width:100%;height:auto}
 .mmd.src{white-space:pre;text-align:left;font-family:var(--mono);font-size:12px;color:var(--muted)}
@@ -482,7 +493,7 @@ window.makeCompetitionBackground("flow",55);</script>
 <div class="wrap">
 <header id="page-top" class="hero">
   <div class="eyebrow">澳門中學升學輔導 · 核實日 2026-10-07</div>
-  <p class="last-updated"><time datetime="2026-11-11T12:04:04+08:00">最後更新：2026-11-11 12:04:04（澳門時間）</time></p>
+  <p class="last-updated"><time datetime="2026-11-13T08:41:37+08:00">最後更新：2026-11-13 08:41:37（澳門時間）</time></p>
   <h1>升學加分問答指南</h1>
   <p class="lede">想知道比賽、證書或代表資格對升學有甚麼幫助？先選問題，再看澳門、香港及內地大學的規定。每項結論附官方來源。</p>
   <div class="reading-switch" role="group" aria-label="閱讀版本"><button type="button" data-reading-mode="simple" aria-pressed="false">簡易版 · 手機</button><button type="button" data-reading-mode="full" aria-pressed="false">完整版 · 電腦</button></div>
@@ -496,7 +507,7 @@ window.makeCompetitionBackground("flow",55);</script>
   <div class="qgroup">學生常問</div>
   <a class="q" href="#q1"><span>四校聯考有哪些加分？</span><small>澳大、理大、科大、旅大分值與免考</small></a>
   <a class="q" href="#q2"><span>澳大加分與推薦</span><small>科普 11 項、人文 9 項、校長推薦</small></a>
-  <a class="q" href="#q3"><span>香港各大學</span><small>理大、城大、教大重點；計算機、工程、理科該參加甚麼比賽；科大 BAAS、哪些不能套用</small></a>
+  <a class="q" href="#q3"><span>香港各大學 · Hong Kong Universities</span><small>理大、城大、教大重點；計算機、工程、理科該參加甚麼比賽 · PolyU, CityU, EdUHK: STEM competitions and certificates (bilingual)</small></a>
   <a class="q" href="#q4"><span>內地名校</span><small>清華、北大、浙大、交大、復旦保送簡章</small></a>
   <a class="q" href="#qsport"><span>體育成績可以保送澳大嗎？</span><small>澳大傑出運動員入學、校長推薦信、四校體育加分、香港各大學</small></a>
   <div class="qgroup">教師想知道</div>
@@ -522,7 +533,7 @@ window.makeCompetitionBackground("flow",55);</script>
 # 升學加分問答指南：澳門四校・香港・內地名校
 
 > **對象：** 澳門高中學生、班主任、升學輔導及競賽負責老師
-> **版本：** 202611071019（更新於 2026-11-07 10:19，Asia/Macau；第 4.3 節補上具體比賽清單、獲獎目標及證書表）
+> **版本：** 202611130839（更新於 2026-11-13 08:39，Asia/Macau；第 4.3、6.7 節改為中英雙語）
 > **本版核實日：** 2026-10-07（第三次核對；前兩次為 2026-10-06 原表及 2026-10-07 合併版）；香港理大、城大、教大另於 2026-11-07 核對
 > **本版新增（2026-11-07）：** 第 4.3 節「香港理大、城大、教大：想讀計算機、工程、理科、電機、機械，怎樣取得優先？」及第 6.7 節「三校體育途徑一覽」（2026-11-07 重新打開香港理大 STARS、eAdmission 日期、國際學歷頁；城大 2027 國際招生單張；教大非本地入學要求、重要日期、自薦計劃、AI 與教育科技課程頁）。**之前新增：** 第 4.2 節「想入讀香港的大學，澳門學生該參加甚麼比賽？」（2026-10-09 核對香港理大 STARS、香港科大 BAAS、香港理大自辦比賽的參賽資格，及港大校長提名計劃文件）。**同日新增：** 第 11.5 節「華為 ICT 大賽澳門站（中學組）對升學有沒有幫助？」及第 13.3 節「本校未參加過的比賽：華為 ICT 大賽值不值得參加？」，第 9 節補一列（2026-10-09 上網核對主辦單位、組別、獎項，並重新打開澳大、理大、科大、旅大、香港理大 STARS、香港科大 BAAS 及教育部白名單原文）。**之前新增：** 第 11.4 節及第 13 節加入「菜鳥黑客松2026」學生組奪旗賽（澳門網絡安全暨奪旗競賽協會、業餘進修中心合辦；2026-10-08 重新打開澳大、理大、科大、旅大原文核對）。**上一版新增：** 第 6 節「體育成績可以保送澳大嗎？校長推薦信有用嗎？四校有沒有體育加分？」（2026-10-07 核對澳大、理大、科大、旅大原文），並加入 6.5「體育成績能否保送香港各大學」；第 4 節補回香港城市大學（4.1）；新增第 13 節「本校過去的比賽，對保送和推薦免試有沒有用？」逐項對照表；第 15 節附錄併入舊版《升學加分總表（合併版）》的條文細表；第 12 節「教育部白名單有沒有用？」（2026-10-07 核對教育部原文及附件）
 > **原則：** 每一句結論都附官方來源代號，完整清單見 [第 16 節](#refs)。官方沒寫的，一律寫「未公布」，不推測分數。
@@ -723,7 +734,7 @@ flowchart LR
 ---
 
 ## 4. 「香港各大學，哪些比賽有幫助？」<a id="q3"></a>
-<!-- card: 香港各大學 | 理大、城大、教大重點；計算機、工程、理科該參加甚麼比賽；科大 BAAS、哪些不能套用 -->
+<!-- card: 香港各大學 · Hong Kong Universities | 理大、城大、教大重點；計算機、工程、理科該參加甚麼比賽 · PolyU, CityU, EdUHK: STEM competitions and certificates (bilingual) -->
 
 ```mermaid
 flowchart TD
@@ -824,108 +835,108 @@ flowchart TD
 
 **不要把香港理大 Python 比賽的條款套到 CPTTM 的 Python 比賽。**
 
-### 4.3 香港理大、城大、教大：想讀計算機、工程、理科、電機、機械，怎樣取得優先？
+### 4.3 香港理大、城大、教大：想讀計算機、工程、理科、電機、機械，怎樣取得優先？<span class="en" lang="en">PolyU, CityU & EdUHK: How to gain priority for Computing, Engineering, Science, EE and ME</span>
 
-**先說結論：**
+**先說結論：**<span class="en" lang="en">Key points</span>
 
-1. 三校都**沒有**給澳門學生的比賽加分表，也沒有保送。[STARS] [CITYINT] [EDUNL]
-2. 比賽獎項真正能用的只有**香港理大 STARS（STEM 範疇）**：可獲直接錄取、有條件錄取或加分，官方 STEM 舉例為 **APMO、ISEF、RoboCup**。[STARS]
-3. 城大、教大的非本地招生頁**沒有任何比賽條文**，主要看高中成績、英語及面試。比賽只能寫進申請資料作佐證。[CITYINT] [EDUNL] [EDUNLP]
-4. 教大的 STEAM 自薦計劃（人工智能與教育科技等）有「較高錄取優先」，但**只限 JUPAS**，澳門學生不能用。[EDUS]
-5. **時間很緊：** 2027 年入學的提前批分別在 **城大 2026-11-15、教大 2026-11-16、理大 2026-11-17** 截止。[CITY27] [EDUDATE] [POLYEA]
+1. 三校都**沒有**給澳門學生的比賽加分表，也沒有保送。[STARS] [CITYINT] [EDUNL]<span class="en" lang="en">None of the three has a competition bonus-point table or guaranteed admission for Macau students.</span>
+2. 比賽獎項真正能用的只有**香港理大 STARS（STEM 範疇）**：可獲直接錄取、有條件錄取或加分，官方 STEM 舉例為 **APMO、ISEF、RoboCup**。[STARS]<span class="en" lang="en">Awards only count formally through **PolyU STARS (STEM)**: direct admission, conditional offer or bonus score. Official STEM examples: **APMO, ISEF, RoboCup**.</span>
+3. 城大、教大的非本地招生頁**沒有任何比賽條文**，主要看高中成績、英語及面試。比賽只能寫進申請資料作佐證。[CITYINT] [EDUNL] [EDUNLP]<span class="en" lang="en">CityU and EdUHK non-local pages have **no competition clauses**; they assess school results, English and interview. Awards serve only as supporting evidence.</span>
+4. 教大的 STEAM 自薦計劃（人工智能與教育科技等）有「較高錄取優先」，但**只限 JUPAS**，澳門學生不能用。[EDUS]<span class="en" lang="en">EdUHK's STEAM Self-nomination Scheme gives higher admission priority, but is **JUPAS-only**; Macau students cannot use it.</span>
+5. **時間很緊：** 2027 年入學的提前批分別在 **城大 2026-11-15、教大 2026-11-16、理大 2026-11-17** 截止。[CITY27] [EDUDATE] [POLYEA]<span class="en" lang="en">**Deadlines are close:** early rounds for 2027 entry close on **CityU 15 Nov, EdUHK 16 Nov, PolyU 17 Nov 2026**.</span>
 
 ```mermaid
 flowchart LR
-    S["澳門高三學生<br/>想讀 STEM"] --> P["理大<br/>eAdmission＋STARS"]
-    S --> C["城大<br/>International Admissions"]
-    S --> E["教大<br/>Non-JUPAS 非本地"]
-    P --> P1["STEM 獎項可換<br/>直接錄取／有條件錄取／加分"]
-    C --> C1["沒有比賽條文<br/>看成績＋英語"]
-    E --> E1["沒有比賽條文<br/>看成績＋面試"]
+    S["澳門高三學生<br/>Macau F6 student<br/>想讀 STEM"] --> P["理大 PolyU<br/>eAdmission＋STARS"]
+    S --> C["城大 CityU<br/>International<br/>Admissions"]
+    S --> E["教大 EdUHK<br/>Non-JUPAS 非本地"]
+    P --> P1["STEM 獎項可換<br/>直接錄取／有條件錄取／加分<br/>Direct / conditional offer / bonus"]
+    C --> C1["沒有比賽條文<br/>No competition clause<br/>看成績＋英語"]
+    E --> E1["沒有比賽條文<br/>No competition clause<br/>看成績＋面試"]
 ```
 
-**第一步：三校怎樣收澳門學生（2027 年入學）**
+**第一步：三校怎樣收澳門學生（2027 年入學）**<span class="en" lang="en">Step 1: How the three universities admit Macau students (2027 entry)</span>
 
-| 項目 | 香港理工大學 | 香港城市大學 | 香港教育大學 | 來源 |
+| 項目<span class="en" lang="en">Item</span> | 香港理工大學<span class="en" lang="en">PolyU</span> | 香港城市大學<span class="en" lang="en">CityU</span> | 香港教育大學<span class="en" lang="en">EdUHK</span> | 來源<span class="en" lang="en">Source</span> |
 | --- | --- | --- | --- | --- |
-| 申請途徑 | 非本地直接申請（eAdmission）；STARS 在同一系統填報 | International Admissions 網上申請；不經 JUPAS | Non-JUPAS 非本地申請 | [POLYEA] [CITYINT] [EDUNLP] |
-| 接受的澳門學歷 | 國際／其他學歷頁**沒有「澳門」一欄**，只列港澳台僑聯招（750 分取 600 分）；未列的學歷**個別評核** | 高中畢業文憑；或 GCE／International A-level 三科合格 | 港澳台僑聯招（750 分取 600 分）；**或**高中畢業文憑／證書 | [POLYQ] [CITYINT] [EDUNL] |
-| 四校聯考成績 | 沒有提及 | 沒有提及 | 沒有提及 | [POLYQ] [CITYINT] [EDUNL] |
-| 英語要求 | 須達英語要求；分數列於另一頁，本次未核對 | IELTS 學術類 6.5；TOEFL iBT 79（新制 4.5） | IELTS 學術類總分 6 | [POLYFAQ] [CITYINT] [EDUNL] |
-| 申請開始 | 2026-09-23 | 2026-09-24 | 2026-10-05 | [POLYEA] [CITY27] [EDUDATE] |
-| **提前批截止** | **2026-11-17** | **2026-11-15** | **2026-11-16** | [POLYEA] [CITY27] [EDUDATE] |
-| 主要批次截止 | 2027-02-11 | 2027-01-15 | 2027-01-06 | [POLYEA] [CITY27] [EDUDATE] |
-| 後期 | 2027-05-14（只限國際生） | 部分課程截止後仍收 | 2027-05-07 | [POLYEA] [CITY27] [EDUDATE] |
-| 面試 | STARS 入圍者面試；課程亦可能面試 | 視乎課程，可能面試 | 合資格者可能獲邀 Zoom 面試 | [STARS] [CITYINT] [EDUN] |
-| 入學獎學金 | 自動考慮，毋須申請 | 自動評定，毋須申請 | 按成績及面試表現自動頒發 | [POLYFAQ] [CITYSCH] [EDUNLP] |
+| 申請途徑<span class="en" lang="en">Route</span> | 非本地直接申請（eAdmission）；STARS 在同一系統填報<span class="en" lang="en">Direct non-local application via eAdmission; STARS filed in the same system</span> | International Admissions 網上申請；不經 JUPAS<span class="en" lang="en">Online via International Admissions; not JUPAS</span> | Non-JUPAS 非本地申請<span class="en" lang="en">Non-JUPAS, non-local</span> | [POLYEA] [CITYINT] [EDUNLP] |
+| 接受的澳門學歷<span class="en" lang="en">Macau qualification</span> | 國際／其他學歷頁**沒有「澳門」一欄**，只列港澳台僑聯招（750 分取 600 分）；未列的學歷**個別評核**<span class="en" lang="en">No Macau entry listed; only the Joint Entrance Exam for HK/Macau/Taiwan (600/750). Others assessed **case by case**</span> | 高中畢業文憑；或 GCE／International A-level 三科合格<span class="en" lang="en">Senior Secondary School Graduation Diploma, or 3 GCE/International A-level passes</span> | 港澳台僑聯招（750 分取 600 分）；**或**高中畢業文憑／證書<span class="en" lang="en">Joint Entrance Exam (600/750) **or** Senior Secondary Graduation Diploma</span> | [POLYQ] [CITYINT] [EDUNL] |
+| 四校聯考成績<span class="en" lang="en">Macau JAE results</span> | 沒有提及<span class="en" lang="en">Not mentioned</span> | 沒有提及<span class="en" lang="en">Not mentioned</span> | 沒有提及<span class="en" lang="en">Not mentioned</span> | [POLYQ] [CITYINT] [EDUNL] |
+| 英語要求<span class="en" lang="en">English</span> | 須達英語要求；分數列於另一頁，本次未核對<span class="en" lang="en">Required; scores on a separate page, not yet checked</span> | IELTS 學術類 6.5；TOEFL iBT 79（新制 4.5）<span class="en" lang="en">IELTS Academic 6.5; TOEFL iBT 79 (new scale 4.5)</span> | IELTS 學術類總分 6<span class="en" lang="en">IELTS Academic overall 6</span> | [POLYFAQ] [CITYINT] [EDUNL] |
+| 申請開始<span class="en" lang="en">Opens</span> | 2026-09-23 | 2026-09-24 | 2026-10-05 | [POLYEA] [CITY27] [EDUDATE] |
+| **提前批截止**<span class="en" lang="en">**Early-round deadline**</span> | **2026-11-17** | **2026-11-15** | **2026-11-16** | [POLYEA] [CITY27] [EDUDATE] |
+| 主要批次截止<span class="en" lang="en">Main-round deadline</span> | 2027-02-11 | 2027-01-15 | 2027-01-06 | [POLYEA] [CITY27] [EDUDATE] |
+| 後期<span class="en" lang="en">Late round</span> | 2027-05-14（只限國際生）<span class="en" lang="en">International students only</span> | 部分課程截止後仍收<span class="en" lang="en">Some programmes accept later applications</span> | 2027-05-07 | [POLYEA] [CITY27] [EDUDATE] |
+| 面試<span class="en" lang="en">Interview</span> | STARS 入圍者面試；課程亦可能面試<span class="en" lang="en">STARS shortlistees; programmes may also interview</span> | 視乎課程，可能面試<span class="en" lang="en">Depends on programme</span> | 合資格者可能獲邀 Zoom 面試<span class="en" lang="en">Eligible applicants may be invited to a Zoom interview</span> | [STARS] [CITYINT] [EDUN] |
+| 入學獎學金<span class="en" lang="en">Entrance scholarship</span> | 自動考慮，毋須申請<span class="en" lang="en">Considered automatically</span> | 自動評定，毋須申請<span class="en" lang="en">Assessed automatically</span> | 按成績及面試表現自動頒發<span class="en" lang="en">Automatic, based on results and interview</span> | [POLYFAQ] [CITYSCH] [EDUNLP] |
 
-**第二步：比賽獎項在三校的作用**
+**第二步：比賽獎項在三校的作用**<span class="en" lang="en">Step 2: What competition awards can do at each university</span>
 
-| 大學 | 比賽／證書可換到甚麼 | 澳門學生能否用 | 寫法 | 來源 |
+| 大學<span class="en" lang="en">University</span> | 比賽／證書可換到甚麼<span class="en" lang="en">What awards can earn</span> | 澳門學生能否用<span class="en" lang="en">Open to Macau?</span> | 寫法<span class="en" lang="en">How to submit</span> | 來源<span class="en" lang="en">Source</span> |
 | --- | --- | --- | --- | --- |
-| **理大 STARS（STEM）** | 直接錄取、有條件錄取或加分；入圍者面試；自動考慮入學獎學金 | **可以**，官方歡迎非本地申請 | 最多填 3 項；每項須有官方證明（姓名、獎項正式名稱、年份、獎項類別；非中英文要附譯本）；檔案每個 5MB、合共 15MB 以內 | [STARS] |
-| 城大 | 國際招生頁及獎學金頁**沒有**比賽加分、免試或點名比賽 | 只能作申請佐證 | 放進個人陳述或履歷；不寫「加分」 | [CITYINT] [CITYSCH] |
-| 教大自薦計劃（STEAM） | 面試／測試表現好者獲較高錄取優先 | **否**，只限 JUPAS，須把課程列為 Band A | — | [EDUS] |
-| 教大非本地申請 | 非本地 FAQ **沒有**提及比賽或非學術成就；按整體表現評核 | 只能作申請佐證 | 面試時可用作例子 | [EDUN] [EDUNLP] |
+| **理大 STARS（STEM）**<span class="en" lang="en">**PolyU STARS (STEM)**</span> | 直接錄取、有條件錄取或加分；入圍者面試；自動考慮入學獎學金<span class="en" lang="en">Direct admission, conditional offer or bonus score; interview if shortlisted; auto-considered for scholarships</span> | **可以**，官方歡迎非本地申請<span class="en" lang="en">**Yes**; non-local applicants welcome</span> | 最多填 3 項；每項須有官方證明（姓名、獎項正式名稱、年份、獎項類別；非中英文要附譯本）；檔案每個 5MB、合共 15MB 以內<span class="en" lang="en">Up to 3 items, each with official proof (name, award title, year, award type; translation if not Chinese/English). 5 MB per file, 15 MB total</span> | [STARS] |
+| 城大<span class="en" lang="en">CityU</span> | 國際招生頁及獎學金頁**沒有**比賽加分、免試或點名比賽<span class="en" lang="en">**No** competition bonus, exemption or named competition</span> | 只能作申請佐證<span class="en" lang="en">Supporting evidence only</span> | 放進個人陳述或履歷；不寫「加分」<span class="en" lang="en">Put in personal statement or CV; do not claim "bonus points"</span> | [CITYINT] [CITYSCH] |
+| 教大自薦計劃（STEAM）<span class="en" lang="en">EdUHK Self-nomination (STEAM)</span> | 面試／測試表現好者獲較高錄取優先<span class="en" lang="en">Higher admission priority after interview/test</span> | **否**，只限 JUPAS，須把課程列為 Band A<span class="en" lang="en">**No**; JUPAS only, Band A choice required</span> | — | [EDUS] |
+| 教大非本地申請<span class="en" lang="en">EdUHK non-local</span> | 非本地 FAQ **沒有**提及比賽或非學術成就；按整體表現評核<span class="en" lang="en">FAQ does **not** mention competitions; holistic assessment</span> | 只能作申請佐證<span class="en" lang="en">Supporting evidence only</span> | 面試時可用作例子<span class="en" lang="en">Use as examples at interview</span> | [EDUN] [EDUNLP] |
 
-**第三步：按想讀的學科，該參加甚麼比賽**
+**第三步：按想讀的學科，該參加甚麼比賽**<span class="en" lang="en">Step 3: Which competitions to enter, by intended subject</span>
 
-下表的「三校相關課程」只列課程範疇；具體課程名稱及收生要求，以當年度課程頁為準。比賽次序按「理大 STARS 官方有沒有舉例」及「比賽級別」排列，**不是**大學公布的分數。
+下表的「三校相關課程」只列課程範疇；具體課程名稱及收生要求，以當年度課程頁為準。比賽次序按「理大 STARS 官方有沒有舉例」及「比賽級別」排列，**不是**大學公布的分數。<span class="en" lang="en">Programme areas only; check each year's programme pages. Order follows whether PolyU STARS names the competition and its level — **not** official scores.</span>
 
-| 想讀 | 三校相關課程範疇 | 第一優先（STARS 官方舉例，或國際奧賽） | 第二優先（國際／區域級，可評核） | 本校已有、可作佐證 | 來源 |
+| 想讀<span class="en" lang="en">Subject</span> | 三校相關課程範疇<span class="en" lang="en">Related programmes</span> | 第一優先（STARS 官方舉例，或國際奧賽）<span class="en" lang="en">First priority (named by STARS, or international olympiad)</span> | 第二優先（國際／區域級，可評核）<span class="en" lang="en">Second priority (international/regional, assessable)</span> | 本校已有、可作佐證<span class="en" lang="en">Our school's existing awards (evidence)</span> | 來源<span class="en" lang="en">Source</span> |
 | --- | --- | --- | --- | --- | --- |
-| **計算機／人工智能** | 理大電子計算；城大電腦科學、AI 與計算（ACT）；教大人工智能與教育科技（AIET） | 國際信息學奧賽 IOI（國際學科奧賽；2026-11-07 版 STARS 頁未逐項列出）；經 MOI 入選澳門代表隊 | APIO、CSP／NOIP 高分、IOAI 等 AI 國際賽 | MOI、CSP、信息技術創新與實踐比賽、知識問答、手機網站、菜鳥黑客松、全球青少年 AI 創新競賽 | [STARS] [MOI] [EDUAIET] |
-| **電機／電子** | 理大電機及電子工程；城大電機工程（電腦與數據工程、電子及電機工程、資訊工程、微電子工程） | **RoboCup**（STARS 官方舉例） | WRO、VEX 世界賽、國際電子技能賽、WorldSkills | 港澳青少年網絡技能競賽、大灣區 AI 及網絡安全挑戰賽 | [STARS] [CITYEE] |
-| **機械／工程** | 理大機械工程；城大工程學院（PRIME 等） | **RoboCup**、**ISEF**（STARS 官方舉例） | MATE ROV 世界賽、日內瓦國際發明展、ITEX（須交作品及個人貢獻） | — | [STARS] [CITYPRIME] |
-| **理科（數、物、化、生）** | 理大應用數學、應用物理、化學及生物；城大理學院（GREAT 等）；教大科學教育 | **APMO**（STARS 官方舉例）；IMO、IPhO、IChO、IBO 等國際奧賽（香港科大奧賽獎學金指定） | ISEF、亞洲物理奧賽 APhO | — | [STARS] [USTO] |
+| **計算機／人工智能**<span class="en" lang="en">**Computing / AI**</span> | 理大電子計算；城大電腦科學、AI 與計算（ACT）；教大人工智能與教育科技（AIET）<span class="en" lang="en">PolyU Computing; CityU Computer Science, ACT; EdUHK AI & Educational Technology</span> | 國際信息學奧賽 IOI（國際學科奧賽；2026-11-07 版 STARS 頁未逐項列出）；經 MOI 入選澳門代表隊<span class="en" lang="en">IOI, via MOI selection into the Macau team (not listed by name on the 2026-11-07 STARS page)</span> | APIO、CSP／NOIP 高分、IOAI 等 AI 國際賽<span class="en" lang="en">APIO, high CSP/NOIP scores, IOAI</span> | MOI、CSP、信息技術創新與實踐比賽、知識問答、手機網站、菜鳥黑客松、全球青少年 AI 創新競賽<span class="en" lang="en">MOI, CSP, NOC IT Innovation, IT Quiz, Mobile Web, Rookie Hackathon CTF, Global Youth AI Innovation</span> | [STARS] [MOI] [EDUAIET] |
+| **電機／電子**<span class="en" lang="en">**Electrical / Electronic**</span> | 理大電機及電子工程；城大電機工程（電腦與數據工程、電子及電機工程、資訊工程、微電子工程）<span class="en" lang="en">PolyU EEE; CityU Electrical Engineering (Computer & Data, EEE, Information, Microelectronics)</span> | **RoboCup**（STARS 官方舉例）<span class="en" lang="en">**RoboCup** (named by STARS)</span> | WRO、VEX 世界賽、國際電子技能賽、WorldSkills<span class="en" lang="en">WRO, VEX Worlds, international electronics skills, WorldSkills</span> | 港澳青少年網絡技能競賽、大灣區 AI 及網絡安全挑戰賽<span class="en" lang="en">HK-Macau Youth Networking Skills; GBA AI & Cybersecurity Challenge</span> | [STARS] [CITYEE] |
+| **機械／工程**<span class="en" lang="en">**Mechanical / Engineering**</span> | 理大機械工程；城大工程學院（PRIME 等）<span class="en" lang="en">PolyU ME; CityU College of Engineering (PRIME, etc.)</span> | **RoboCup**、**ISEF**（STARS 官方舉例）<span class="en" lang="en">**RoboCup**, **ISEF** (named by STARS)</span> | MATE ROV 世界賽、日內瓦國際發明展、ITEX（須交作品及個人貢獻）<span class="en" lang="en">MATE ROV Worlds, Geneva Inventions, ITEX (submit work and personal role)</span> | — | [STARS] [CITYPRIME] |
+| **理科（數、物、化、生）**<span class="en" lang="en">**Science (Maths, Physics, Chemistry, Biology)**</span> | 理大應用數學、應用物理、化學及生物；城大理學院（GREAT 等）；教大科學教育<span class="en" lang="en">PolyU Applied Maths, Applied Physics, ABCT; CityU College of Science (GREAT); EdUHK Science Education</span> | **APMO**（STARS 官方舉例）；IMO、IPhO、IChO、IBO 等國際奧賽（香港科大奧賽獎學金指定）<span class="en" lang="en">**APMO** (named by STARS); IMO, IPhO, IChO, IBO (HKUST olympiad scholarship list)</span> | ISEF、亞洲物理奧賽 APhO<span class="en" lang="en">ISEF, APhO</span> | — | [STARS] [USTO] |
 
-**第四步：具體比賽清單——參加甚麼、怎樣參加、拿甚麼獎**
+**第四步：具體比賽清單——參加甚麼、怎樣參加、拿甚麼獎**<span class="en" lang="en">Step 4: Competition list — what to enter and how</span>
 
-「理大 STARS 地位」一欄：**官方舉例**＝STARS 頁面寫出比賽名稱；**國際級**＝未點名，但屬國際賽，可按規模評核；**佐證**＝本地或區域賽，可填報但分量較輕。日期按 2026-10-11 核實的資料，新一屆以官方公布為準。
+「理大 STARS 地位」一欄：**官方舉例**＝STARS 頁面寫出比賽名稱；**國際級**＝未點名，但屬國際賽，可按規模評核；**佐證**＝本地或區域賽，可填報但分量較輕。日期按 2026-10-11 核實的資料，新一屆以官方公布為準。<span class="en" lang="en">"STARS status": **Named** = listed on the STARS page; **International** = not named but international-level, assessed by scale; **Evidence** = local/regional, lighter weight. Dates as verified on 2026-10-11; follow official announcements.</span>
 
-| 比賽 | 適合學科 | 理大 STARS 地位 | 澳門學生怎樣參加 | 下一屆時間 | 來源 |
+| 比賽<span class="en" lang="en">Competition</span> | 適合學科<span class="en" lang="en">Subject</span> | 理大 STARS 地位<span class="en" lang="en">STARS status</span> | 澳門學生怎樣參加<span class="en" lang="en">How Macau students enter</span> | 下一屆時間<span class="en" lang="en">Next edition</span> | 來源<span class="en" lang="en">Source</span> |
 | --- | --- | --- | --- | --- | --- |
-| **RoboCup／RoboCupJunior** | 電機、機械、計算機 | **官方舉例** | RCJ 香港賽（上屆 4 月，在港大舉行）→ 中國賽（5 月）→ 世界賽 | 世界賽 2027-06-15 至 21，德國紐倫堡 | [STARS] [ROBOCUP] |
-| **ISEF 國際科學與工程大獎賽** | 理科、工程 | **官方舉例** | 澳門的選拔途徑**本次未查到**；香港區選拔只限香港註冊學校。向教青局查詢 | 每年 5 月 | [STARS] |
-| **APMO 亞太數學奧林匹克** | 數學、理科 | **官方舉例** | 澳門的參賽途徑**本次未查到**；向澳門數學奧林匹克負責單位或教青局查詢 | 未公布 | [STARS] |
-| **IOI 國際信息學奧林匹克**（及 APIO） | 計算機 | 國際級（另屬香港科大奧賽獎學金指定） | 不能自行報名：經 **MOI 澳門信息學奧林匹克選拔賽**（澳門電腦學會，約 3 月）入選澳門隊，每地 4 人 | IOI 2027-09-12 至 19，德國波茨坦 | [MOI] [USTO] |
-| **IOAI 國際人工智能奧林匹克** | 計算機、AI | 國際級 | 不能自行報名：經澳門電腦學會 **MOAI** 選拔 | 2027-07-04 至 10，新加坡 | [IOAI] |
-| **全國青少年科技創新大賽** | 理科、工程 | 國際級以下，屬國家級；**澳大加分點名** | 經「全澳青少年（學界）創新挑戰賽」（只可由學校報名，上屆 3 月截止）→ 教青局組澳門學界代表隊 | 每年 7 月底 | [CYSCC] [MTC] |
-| **WRO 國際總決賽** | 電機、機械 | 國際級 | 先贏澳門區選拔賽（上屆約 6 月底） | 2026-12-08 至 10，波多黎各 | [WRO] |
-| **VEX 機械人世錦賽** | 電機、機械 | 國際級 | 官方平台登記隊伍 → 區域錦標賽取得名額；教青局機械人選拔大賽設 VEX IQ | 2027 年 4 月，美國聖路易斯 | [VEX] |
-| **MATE ROV 水底機械人** | 機械、電機 | 國際級 | 香港地區賽（上屆 4 月）→ 世界賽；澳門學校參賽資格未核實 | 世界賽約 6 月 | [MATE] |
-| 本校已參加：CSP／NOIP、信息技術創新與實踐比賽、港澳網絡技能、大灣區 AI 及網絡安全、知識問答、手機網站 | 計算機 | **佐證** | 見 [第 13 節](#qpast) | — | [STARS] |
+| **RoboCup／RoboCupJunior** | 電機、機械、計算機<span class="en" lang="en">EE, ME, Computing</span> | **官方舉例**<span class="en" lang="en">**Named**</span> | RCJ 香港賽（上屆 4 月，在港大舉行）→ 中國賽（5 月）→ 世界賽<span class="en" lang="en">RCJ Hong Kong (April, at HKU) → China Open (May) → World Cup</span> | 世界賽 2027-06-15 至 21，德國紐倫堡<span class="en" lang="en">World Cup 15–21 Jun 2027, Nuremberg</span> | [STARS] [ROBOCUP] |
+| **ISEF 國際科學與工程大獎賽**<span class="en" lang="en">**Regeneron ISEF**</span> | 理科、工程<span class="en" lang="en">Science, Engineering</span> | **官方舉例**<span class="en" lang="en">**Named**</span> | 澳門的選拔途徑**本次未查到**；香港區選拔只限香港註冊學校。向教青局查詢<span class="en" lang="en">Macau selection route **not found**; HK selection is for HK schools only. Ask DSEDJ</span> | 每年 5 月<span class="en" lang="en">Every May</span> | [STARS] |
+| **APMO 亞太數學奧林匹克**<span class="en" lang="en">**Asian Pacific Mathematics Olympiad**</span> | 數學、理科<span class="en" lang="en">Maths, Science</span> | **官方舉例**<span class="en" lang="en">**Named**</span> | 澳門的參賽途徑**本次未查到**；向澳門數學奧林匹克負責單位或教青局查詢<span class="en" lang="en">Macau route **not found**; ask the Macau maths olympiad organiser or DSEDJ</span> | 未公布<span class="en" lang="en">Not announced</span> | [STARS] |
+| **IOI 國際信息學奧林匹克**（及 APIO）<span class="en" lang="en">**International Olympiad in Informatics** (and APIO)</span> | 計算機<span class="en" lang="en">Computing</span> | 國際級（另屬香港科大奧賽獎學金指定）<span class="en" lang="en">International (also on HKUST scholarship list)</span> | 不能自行報名：經 **MOI 澳門信息學奧林匹克選拔賽**（澳門電腦學會，約 3 月）入選澳門隊，每地 4 人<span class="en" lang="en">No direct entry: selected via **MOI** (Macau Computer Society, ~March); 4 per team</span> | IOI 2027-09-12 至 19，德國波茨坦<span class="en" lang="en">12–19 Sep 2027, Potsdam</span> | [MOI] [USTO] |
+| **IOAI 國際人工智能奧林匹克**<span class="en" lang="en">**International Olympiad in AI**</span> | 計算機、AI<span class="en" lang="en">Computing, AI</span> | 國際級<span class="en" lang="en">International</span> | 不能自行報名：經澳門電腦學會 **MOAI** 選拔<span class="en" lang="en">No direct entry: selected via **MOAI** (Macau Computer Society)</span> | 2027-07-04 至 10，新加坡<span class="en" lang="en">4–10 Jul 2027, Singapore</span> | [IOAI] |
+| **全國青少年科技創新大賽**<span class="en" lang="en">**China Adolescents Science & Technology Innovation Contest**</span> | 理科、工程<span class="en" lang="en">Science, Engineering</span> | 國際級以下，屬國家級；**澳大加分點名**<span class="en" lang="en">National level; **named in UM bonus scheme**</span> | 經「全澳青少年（學界）創新挑戰賽」（只可由學校報名，上屆 3 月截止）→ 教青局組澳門學界代表隊<span class="en" lang="en">Via the Macau Youth Innovation Challenge (school entry, March) → DSEDJ Macau team</span> | 每年 7 月底<span class="en" lang="en">Late July</span> | [CYSCC] [MTC] |
+| **WRO 國際總決賽**<span class="en" lang="en">**WRO International Final**</span> | 電機、機械<span class="en" lang="en">EE, ME</span> | 國際級<span class="en" lang="en">International</span> | 先贏澳門區選拔賽（上屆約 6 月底）<span class="en" lang="en">Win the Macau qualifier (~late June)</span> | 2026-12-08 至 10，波多黎各<span class="en" lang="en">8–10 Dec 2026, Puerto Rico</span> | [WRO] |
+| **VEX 機械人世錦賽**<span class="en" lang="en">**VEX Robotics World Championship**</span> | 電機、機械<span class="en" lang="en">EE, ME</span> | 國際級<span class="en" lang="en">International</span> | 官方平台登記隊伍 → 區域錦標賽取得名額；教青局機械人選拔大賽設 VEX IQ<span class="en" lang="en">Register team → qualify at regional events; DSEDJ robotics contest includes VEX IQ</span> | 2027 年 4 月，美國聖路易斯<span class="en" lang="en">April 2027, St. Louis</span> | [VEX] |
+| **MATE ROV 水底機械人**<span class="en" lang="en">**MATE ROV Competition**</span> | 機械、電機<span class="en" lang="en">ME, EE</span> | 國際級<span class="en" lang="en">International</span> | 香港地區賽（上屆 4 月）→ 世界賽；澳門學校參賽資格未核實<span class="en" lang="en">HK regional (April) → World; Macau school eligibility not verified</span> | 世界賽 2027-06-24 至 26，美國華盛頓州<span class="en" lang="en">World 24–26 Jun 2027, Federal Way, Washington</span> | [MATE] |
+| 本校已參加：CSP／NOIP、信息技術創新與實踐比賽、港澳網絡技能、大灣區 AI 及網絡安全、知識問答、手機網站<span class="en" lang="en">Our school's current competitions</span> | 計算機<span class="en" lang="en">Computing</span> | **佐證**<span class="en" lang="en">**Evidence**</span> | 見 [第 13 節](#qpast)<span class="en" lang="en">See Section 13</span> | — | [STARS] |
 
-**第五步：要拿到甚麼獎才有分量**
+**第五步：要拿到甚麼獎才有分量**<span class="en" lang="en">Step 5: What level of award carries weight</span>
 
-三校都**沒有公布**名次或級別門檻；理大 STARS 只寫「按成就的規模及重要性評核」。下表是**本校按此原則整理的建議**，不是大學標準。[STARS]
+三校都**沒有公布**名次或級別門檻；理大 STARS 只寫「按成就的規模及重要性評核」。下表是**本校按此原則整理的建議**，不是大學標準。[STARS]<span class="en" lang="en">No university publishes a threshold; STARS assesses "scale and significance". The table below is **our school's advice**, not a university standard.</span>
 
-| 分量 | 獎項例子 | 建議怎樣用 |
+| 分量<span class="en" lang="en">Weight</span> | 獎項例子<span class="en" lang="en">Examples</span> | 建議怎樣用<span class="en" lang="en">How to use</span> |
 | --- | --- | --- |
-| **最強** | 國際賽獎牌或名次：IOI／IOAI／APMO 獎牌、ISEF 獎項、RoboCup 世界賽名次 | 放 STARS 第 1 項；同時報香港科大奧賽獎學金（如屬指定奧賽） |
-| **強** | 入選澳門代表隊；區域或國家級賽前三名（RCJ 香港賽、中國賽、全國青少年科技創新大賽） | 寫明「選拔 → 代表資格 → 成績」整條晉級路線 |
-| 一般 | 澳門本地賽冠、亞、季軍 | 可填作第 3 項，或寫進個人陳述作佐證 |
-| 不計 | 參與證書、培訓、交流、觀摩 | 不要當比賽獎項填報 |
+| **最強**<span class="en" lang="en">**Strongest**</span> | 國際賽獎牌或名次：IOI／IOAI／APMO 獎牌、ISEF 獎項、RoboCup 世界賽名次<span class="en" lang="en">International medals or placings: IOI/IOAI/APMO medals, ISEF awards, RoboCup World placings</span> | 放 STARS 第 1 項；同時報香港科大奧賽獎學金（如屬指定奧賽）<span class="en" lang="en">List first in STARS; also eligible for HKUST olympiad scholarship if on its list</span> |
+| **強**<span class="en" lang="en">**Strong**</span> | 入選澳門代表隊；區域或國家級賽前三名（RCJ 香港賽、中國賽、全國青少年科技創新大賽）<span class="en" lang="en">Macau team selection; top 3 at regional/national level</span> | 寫明「選拔 → 代表資格 → 成績」整條晉級路線<span class="en" lang="en">Show the full path: selection → team place → result</span> |
+| 一般<span class="en" lang="en">Moderate</span> | 澳門本地賽冠、亞、季軍<span class="en" lang="en">Macau local champion, 1st or 2nd runner-up</span> | 可填作第 3 項，或寫進個人陳述作佐證<span class="en" lang="en">Third item, or mention in personal statement</span> |
+| 不計<span class="en" lang="en">Does not count</span> | 參與證書、培訓、交流、觀摩<span class="en" lang="en">Participation certificates, training, exchanges, visits</span> | 不要當比賽獎項填報<span class="en" lang="en">Do not list as awards</span> |
 
-**第六步：證書**
+**第六步：證書**<span class="en" lang="en">Step 6: Certificates</span>
 
-| 證書 | 三校作用 | 要不要考 | 來源 |
+| 證書<span class="en" lang="en">Certificate</span> | 三校作用<span class="en" lang="en">Use at the three universities</span> | 要不要考<span class="en" lang="en">Should students take it?</span> | 來源<span class="en" lang="en">Source</span> |
 | --- | --- | --- | --- |
-| **IELTS／TOEFL** | **必須**：城大 IELTS 6.5（TOEFL iBT 79）、教大 IELTS 6；理大分數另頁公布 | **一定要考**，比賽不能代替 | [CITYINT] [EDUNL] [POLYFAQ] |
-| MOS、Adobe ACP、思科 CCNA 等 IT 證書 | 三校都**沒有**點名，沒有加分或優先 | 有興趣才考；不要為升學而考 | [STARS] [CITYINT] [EDUNL] |
-| 比賽獎狀、代表資格證明 | STARS 必須上載：須有姓名、獎項正式名稱、年份、獎項類別；非中英文附譯本 | 每項比賽都要保存，並保存官方得獎名單網址 | [STARS] |
+| **IELTS／TOEFL** | **必須**：城大 IELTS 6.5（TOEFL iBT 79）、教大 IELTS 6；理大分數另頁公布<span class="en" lang="en">**Required**: CityU IELTS 6.5 (TOEFL iBT 79), EdUHK IELTS 6; PolyU on a separate page</span> | **一定要考**，比賽不能代替<span class="en" lang="en">**Yes, essential**; awards cannot replace it</span> | [CITYINT] [EDUNL] [POLYFAQ] |
+| MOS、Adobe ACP、思科 CCNA 等 IT 證書<span class="en" lang="en">IT certificates: MOS, Adobe ACP, Cisco CCNA</span> | 三校都**沒有**點名，沒有加分或優先<span class="en" lang="en">**Not named** by any of the three; no bonus or priority</span> | 有興趣才考；不要為升學而考<span class="en" lang="en">Only for interest, not for admission</span> | [STARS] [CITYINT] [EDUNL] |
+| 比賽獎狀、代表資格證明<span class="en" lang="en">Award certificates, team selection proof</span> | STARS 必須上載：須有姓名、獎項正式名稱、年份、獎項類別；非中英文附譯本<span class="en" lang="en">Must upload for STARS: name, official award title, year, award type; translation if needed</span> | 每項比賽都要保存，並保存官方得獎名單網址<span class="en" lang="en">Keep for every competition, with the official results URL</span> | [STARS] |
 
-詳見 [第 10 節](#q8)「哪些證書有用？」。
+詳見 [第 10 節](#q8)「哪些證書有用？」。<span class="en" lang="en">See Section 10, "Which certificates are useful?"</span>
 
-**現在要做的事（2026-11-07 起）：**
+**現在要做的事（2026-11-13 起）：**<span class="en" lang="en">What to do now (from 13 Nov 2026)</span>
 
-| 先後 | 要做的事 | 期限 | 來源 |
+| 先後<span class="en" lang="en">Order</span> | 要做的事<span class="en" lang="en">Action</span> | 期限<span class="en" lang="en">Deadline</span> | 來源<span class="en" lang="en">Source</span> |
 | --- | --- | --- | --- |
-| 1 | 決定是否走提前批：城大 → 教大 → 理大 | 11-15、11-16、11-17 | [CITY27] [EDUDATE] [POLYEA] |
-| 2 | 選最強 3 項 STEM 成就，掃描獎狀、官方得獎名單；非中英文附譯本 | 理大申請時一併上載 | [STARS] |
-| 3 | 預約 IELTS／TOEFL；英語成績不能用比賽代替 | 主要批次前（城大 2027-01-15） | [CITYINT] |
-| 4 | 同時想報香港科大：BAAS 非 JUPAS 優先批次 | 2026-11-25 | [USTBAAS] |
-| 5 | 高一、高二學生：瞄準 STARS 舉例的比賽（RoboCup、ISEF、APMO）或國際奧賽路線（如 MOI → IOI），由本地選拔晉級 | 高三上學期前完成 | [STARS] |
+| 1 | 決定是否走提前批：城大 → 教大 → 理大<span class="en" lang="en">Decide on early round: CityU → EdUHK → PolyU</span> | 11-15、11-16、11-17 | [CITY27] [EDUDATE] [POLYEA] |
+| 2 | 選最強 3 項 STEM 成就，掃描獎狀、官方得獎名單；非中英文附譯本<span class="en" lang="en">Choose your best 3 STEM achievements; scan certificates and official results lists</span> | 理大申請時一併上載<span class="en" lang="en">Upload with the PolyU application</span> | [STARS] |
+| 3 | 預約 IELTS／TOEFL；英語成績不能用比賽代替<span class="en" lang="en">Book IELTS/TOEFL; awards cannot replace English scores</span> | 主要批次前（城大 2027-01-15）<span class="en" lang="en">Before main round (CityU 15 Jan 2027)</span> | [CITYINT] |
+| 4 | 同時想報香港科大：BAAS 非 JUPAS 優先批次<span class="en" lang="en">Also applying to HKUST: BAAS non-JUPAS priority round</span> | 2026-11-25 | [USTBAAS] |
+| 5 | 高一、高二學生：瞄準 STARS 舉例的比賽（RoboCup、ISEF、APMO）或國際奧賽路線（如 MOI → IOI），由本地選拔晉級<span class="en" lang="en">F4–F5 students: aim for STARS-named competitions (RoboCup, ISEF, APMO) or the olympiad path (MOI → IOI)</span> | 高三上學期前完成<span class="en" lang="en">Before F6 first term</span> | [STARS] |
 
 ---
 
@@ -1101,19 +1112,19 @@ flowchart LR
 | 「校內體育科分數高有用嗎？」 | 條文看的都是比賽成績或代表資格，沒有一條寫校內體育科分數。 |
 | 「可以用體育保送去香港的大學嗎？」 | 香港沒有保送。多數運動員入學計劃要有資格代表香港，澳門代表不能用。澳門學生可報城大 OAES、理大 STARS、科大 BAAS，但都要另外報名、達到英語和入學要求，不是免試。 |
 
-### 6.7 香港理大、城大、教大：三校體育途徑一覽
+### 6.7 香港理大、城大、教大：三校體育途徑一覽<span class="en" lang="en">PolyU, CityU & EdUHK: Sports admission routes</span>
 
-| 大學 | 澳門學生**可以**用 | 澳門學生**不能**用 | 羽毛球等項目 | 來源 |
+| 大學<span class="en" lang="en">University</span> | 澳門學生**可以**用<span class="en" lang="en">**Open** to Macau students</span> | 澳門學生**不能**用<span class="en" lang="en">**Not open** to Macau students</span> | 羽毛球等項目<span class="en" lang="en">Badminton and other sports</span> | 來源<span class="en" lang="en">Source</span> |
 | --- | --- | --- | --- | --- |
-| **香港理工大學** | **STARS（體育範疇）**：直接錄取、有條件錄取或加分；官方舉例奧運、亞運、殘奧；最多填 3 項 | OSRS：只限本地、須有資格代表香港；SALSA | STARS 沒有限定項目，按比賽規模及名次評核 | [STARS] [POLYOSRS] |
-| **香港城市大學** | **OAES（非本地傑出運動員入學獎學金）**：推薦予學院作入學考慮＋全額學費＋宿舍，每年最高 HK$250,000；2027-01-30 截止 | SAAS（要 JUPAS／本地紀錄及香港體育機構推薦）；SALSA（須有資格代表香港） | OAES 18 個項目**包括羽毛球**、乒乓球、游泳、田徑、籃球、足球等 | [CITYS] [CITYSAAS] [CITYSALSA] |
-| **香港教育大學** | **沒有**為非本地學生而設的運動員入學途徑 | 自薦計劃（體育）只限 JUPAS；精英運動員提名計劃與香港體育學院、港協暨奧委會合作；SALSA | — | [EDUS] [EDUSALSA] |
+| **香港理工大學**<span class="en" lang="en">**PolyU**</span> | **STARS（體育範疇）**：直接錄取、有條件錄取或加分；官方舉例奧運、亞運、殘奧；最多填 3 項<span class="en" lang="en">**STARS (Sports)**: direct admission, conditional offer or bonus score; examples: Olympics, Asian Games, Paralympics; up to 3 items</span> | OSRS：只限本地、須有資格代表香港；SALSA<span class="en" lang="en">OSRS: local only, must be eligible to represent Hong Kong; SALSA</span> | STARS 沒有限定項目，按比賽規模及名次評核<span class="en" lang="en">No fixed sport list; assessed by scale and placing</span> | [STARS] [POLYOSRS] |
+| **香港城市大學**<span class="en" lang="en">**CityU**</span> | **OAES（非本地傑出運動員入學獎學金）**：推薦予學院作入學考慮＋全額學費＋宿舍，每年最高 HK$250,000；2027-01-30 截止<span class="en" lang="en">**OAES (Outstanding Athletes Entrance Scholarship, non-local)**: referred to colleges for admission + full tuition + hall, up to HK$250,000 a year; deadline 30 Jan 2027</span> | SAAS（要 JUPAS／本地紀錄及香港體育機構推薦）；SALSA（須有資格代表香港）<span class="en" lang="en">SAAS (needs JUPAS/local record and HK sports body referral); SALSA (must be eligible to represent HK)</span> | OAES 18 個項目**包括羽毛球**、乒乓球、游泳、田徑、籃球、足球等<span class="en" lang="en">18 sports **including badminton**, table tennis, swimming, athletics, basketball, football</span> | [CITYS] [CITYSAAS] [CITYSALSA] |
+| **香港教育大學**<span class="en" lang="en">**EdUHK**</span> | **沒有**為非本地學生而設的運動員入學途徑<span class="en" lang="en">**No** athlete admission route for non-local students</span> | 自薦計劃（體育）只限 JUPAS；精英運動員提名計劃與香港體育學院、港協暨奧委會合作；SALSA<span class="en" lang="en">Self-nomination (Sports) is JUPAS-only; elite athlete nomination works with HKSI and SF&OC; SALSA</span> | — | [EDUS] [EDUSALSA] |
 
-**三點提醒：**
+**三點提醒：**<span class="en" lang="en">Three reminders</span>
 
-- 三校都**不是免試**：仍須達入學及英語要求。[STARS] [CITYS] [EDUNL]
-- 要準備**代表澳門出賽**或國際賽名次的官方證明；城大 OAES 另要教練推薦信、比賽影片連結及醫生證明。[CITYS]
-- 澳門本地的體育途徑（澳大傑出運動員入學、四校體育加分）見 6.1 至 6.4。
+- 三校都**不是免試**：仍須達入學及英語要求。[STARS] [CITYS] [EDUNL]<span class="en" lang="en">None is exam-free: entry and English requirements still apply.</span>
+- 要準備**代表澳門出賽**或國際賽名次的官方證明；城大 OAES 另要教練推薦信、比賽影片連結及醫生證明。[CITYS]<span class="en" lang="en">Prepare official proof of **representing Macau** or international placings; CityU OAES also needs a coach's reference, match video links and a medical certificate.</span>
+- 澳門本地的體育途徑（澳大傑出運動員入學、四校體育加分）見 6.1 至 6.4。<span class="en" lang="en">For Macau routes (UM Outstanding Athletes, JAE sports bonus), see 6.1–6.4.</span>
 
 ---
 
@@ -1903,6 +1914,8 @@ flowchart TD
 <script>
 (function(){
   var src=document.getElementById('md').textContent;
+  // Plain text of a heading or cell; English spans joined with the given separator.
+  function bi(el,sep){var c=el.cloneNode(true);c.querySelectorAll('.en').forEach(function(e){if(sep===null)e.remove();else e.textContent=sep+e.textContent.trim();});return c.textContent.trim();}
   var doc=document.getElementById('doc');
   if(!window.marked){doc.innerHTML='<pre>'+src.replace(/[&<]/g,function(c){return c==='&'?'&amp;':'&lt;'})+'</pre>';return;}
   doc.innerHTML=marked.parse(src,{gfm:true});
@@ -1912,7 +1925,7 @@ flowchart TD
   doc.querySelectorAll('h2 a[id]').forEach(function(a){a.parentElement.id=a.id;a.remove();});
   // wrap tables
   doc.querySelectorAll('table').forEach(function(t){var w=document.createElement('div');w.className='tbl';t.parentNode.insertBefore(w,t);w.appendChild(t);
-    var heads=[].map.call(t.querySelectorAll('thead th'),function(h){return h.textContent.trim();});
+    var heads=[].map.call(t.querySelectorAll('thead th'),function(h){return bi(h,'\n');});
     t.querySelectorAll('tbody tr').forEach(function(r){[].forEach.call(r.children,function(c,i){if(heads[i])c.dataset.label=heads[i];if(!c.textContent.trim()){c.classList.add('blank');return;}var v=document.createElement('span');v.className='v';while(c.firstChild)v.appendChild(c.firstChild);c.appendChild(v);});});});
   // status cells
   doc.querySelectorAll('td').forEach(function(td){var t=td.textContent;
@@ -1933,7 +1946,7 @@ flowchart TD
   doc.querySelectorAll('pre code.language-mermaid').forEach(function(c){
     var source=c.textContent, figure=document.createElement('figure');figure.className='figure';
     var previous=c.parentElement.previousElementSibling;
-    var title=previous&&/^H[23]$/.test(previous.tagName)?previous.textContent:'獎項與升學途徑關連圖';
+    var title=previous&&/^H[23]$/.test(previous.tagName)?bi(previous,' · '):'獎項與升學途徑關連圖';
     var caption=document.createElement('figcaption');caption.textContent=title;figure.appendChild(caption);
     var tools=document.createElement('div');tools.className='figure-tools';
     tools.innerHTML='<button type="button" data-zoom="out" aria-label="縮小關連圖">− 縮小</button><button type="button" data-zoom="in" aria-label="放大關連圖">＋ 放大</button><button type="button" data-zoom="fit">適合寬度</button><button type="button" data-zoom="open">放大檢視</button><output aria-live="polite"></output>';figure.appendChild(tools);
@@ -1964,7 +1977,7 @@ flowchart TD
       if(!el.id)el.id='section-'+(sectionIndex++);
       current=document.createElement('details');current.className='sec';
       var summary=document.createElement('summary');doc.insertBefore(current,el);summary.appendChild(el);current.appendChild(summary);
-      var link=document.createElement('a');link.href='#'+el.id;link.textContent=el.textContent;document.getElementById('reader-toc-links').appendChild(link);
+      var link=document.createElement('a');link.href='#'+el.id;link.textContent=bi(el,' · ');document.getElementById('reader-toc-links').appendChild(link);
       summary.addEventListener('click',function(e){if(mode==='full')e.preventDefault();});
     }else if(current&&el.tagName!=='HR'){current.appendChild(el);}
   });
@@ -1984,7 +1997,7 @@ flowchart TD
   doc.querySelectorAll('.tbl').forEach(function(wrapper,index){
     var table=wrapper.querySelector('table'),rows=[].slice.call(table.querySelectorAll('tbody tr'));
     var context=wrapper.closest('.subsection')||wrapper.closest('.sec');var heading=context&&context.querySelector('summary h3,summary h2');
-    var caption=document.createElement('caption');caption.textContent=heading&&heading.tagName==='H3'?heading.textContent:'比較表 '+(index+1);table.prepend(caption);
+    var caption=document.createElement('caption');caption.textContent=heading&&heading.tagName==='H3'?bi(heading,null):'比較表 '+(index+1);table.prepend(caption);
     wrapper.tabIndex=0;wrapper.setAttribute('role','region');wrapper.setAttribute('aria-label',caption.textContent+'，可滑動查看比較欄位');
     var tools=document.createElement('div');tools.className='table-tools';var label=document.createElement('label');label.textContent='搜尋此表';
     var input=document.createElement('input');input.type='search';input.placeholder='大學、比賽或資格';input.setAttribute('aria-label','搜尋'+caption.textContent);label.appendChild(input);tools.appendChild(label);
